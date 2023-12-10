@@ -1,9 +1,14 @@
 <div class="flex justify-center items-start mt-16">
     <div class="flex flex-col mx-auto px-4 ">
-        <div>
+        <div class="flex gap-4">
             <mat-form-field class="w-full" appearance="outline">
                 <input matInput placeholder="Search by name..." [(ngModel)]="filterText" >
             </mat-form-field>
+            <div>
+                <button routerLink="/create-user" type="button" color="primary" mat-fab>
+                    <mat-icon>add</mat-icon>
+                </button>
+            </div>
         </div>
         <div class="flex bg-sky-300 p-4">
             <div id="user-id" class="w-12">Id</div>
