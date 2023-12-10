@@ -1,0 +1,48 @@
+<div class="flex justify-center items-start mt-16">
+  <form class="flex flex-col mx-auto px-4  w-1/4" [formGroup]="userForm">
+    <mat-form-field class="w-full" appearance="outline">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name">
+    </mat-form-field>
+    <mat-form-field class="w-full" appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email">
+    </mat-form-field>
+    <mat-form-field class="w-full" appearance="outline">
+      <mat-label>Mobile</mat-label>
+      <input matInput formControlName="mobile">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Gender</mat-label>
+      <input matInput formControlName="gender">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Role</mat-label>
+      <input matInput formControlName="role">
+    </mat-form-field>
+    <div class="relative w-full" formArrayName="addresses" *ngFor="let creds of userForm.controls.addresses.controls; let i = index">
+      <ng-container [formGroupName]="i">
+        <div class="address-action flex gap-4 justify-start">
+          <button (click)="addAddress()" type="button" color="primary" mat-mini-fab>
+            <mat-icon>add</mat-icon>
+          </button>
+          <button *ngIf="i > 0" (click)="deleteAddress(i)" type="button" color="warn" mat-mini-fab>
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+        <mat-form-field class="w-full" appearance="outline">
+          <mat-label>Addresses</mat-label>
+          <input matInput formControlName="name">
+        </mat-form-field>
+      </ng-container>
+    </div>
+
+    <div *ngIf="actionMessage" class="w-full p-4 text-center text-green-500 bg-green-50 mb-4" >
+      {{ actionMessage }}
+    </div>
+    <div>
+      <button *ngIf="!userId" class="w-full" mat-flat-button color="primary" [disabled]="userForm.invalid" (click)="registerUser()">Register User</button>
+      <button *ngIf="userId" class="w-full" mat-flat-button color="primary" [disabled]="userForm.invalid" (click)="updateUser()">Update User</button>
+    </div>
+  </form>
+</div>

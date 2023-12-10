@@ -1,0 +1,35 @@
+<div class="flex justify-center items-start mt-16">
+    <div class="flex flex-col mx-auto px-4 ">
+        <div>
+            <mat-form-field class="w-full" appearance="outline">
+                <input matInput placeholder="Search by name..." [(ngModel)]="filterText" >
+            </mat-form-field>
+        </div>
+        <div class="flex bg-sky-300 p-4">
+            <div id="user-id" class="w-12">Id</div>
+            <div id="user-name" class="w-24">Name</div>
+            <div id="user-email" class="w-28">Email</div>
+            <div id="user-mobile" class="w-24">Mobile</div>
+            <div id="user-gender" class="w-24">Gender</div>
+            <div id="user-role" class="w-24">Role</div>
+            <div id="user-address">Address</div>
+        </div>
+        <div class="flex border-b px-4 py0 items-center" *ngFor="let user of users | searchFilter:filterText; let i = index">
+            <div id="user-id" class="w-12">{{ i + 1 }}</div>
+            <div id="user-name" class="w-24"> {{ user?.name }} </div>
+            <div id="user-email" class="w-28">{{ user?.email }}</div>
+            <div id="user-mobile" class="w-24">{{ user?.mobile }}</div>
+            <div id="user-gender" class="w-24">{{ user?.gender }}</div>
+            <div id="user-role" class="w-24">{{ user?.role }}</div>
+            <div id="user-address" class="w-96"> <span *ngFor="let address of user?.addresses; let ai = index"> ({{ ai + 1 }}) {{ address.name }}, </span></div>
+            <div id="user-action" class="w-32 flex justify-end">
+                <button routerLink="/update-user/{{i}}" type="button" color="primary" mat-icon-button>
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button (click)="deleteUser(i)"  type="button" color="warn" mat-icon-button>
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+  </div>
